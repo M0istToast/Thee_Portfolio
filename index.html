@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOUR NAME — somewhere online</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box}
+:root{--bg:#09090b;--fg:#eeeaf0;--muted:#77727a;--pink:#ff3f9d;--line:#211e23;--soft:#111014}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Space Grotesk",Arial,sans-serif;overflow-x:hidden;transition:background .35s,color .35s}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");z-index:20}
+a{color:inherit;text-decoration:none}
+body.light{--bg:#f2eef1;--fg:#171318;--muted:#6d666e;--line:#d5cfd4;--soft:#e9e3e8}
+body.light:before{opacity:.035}
+body.light .hero h1 .line2{color:transparent;-webkit-text-stroke:1px #918a91}
+body.light .marquee{color:#817981}
+body.light .project:hover{background:#e9e3e8}
+body.light .orbit{border-color:#cfc7ce}
+body.light .about .statement .muted,
+body.light .project p,
+body.light .project .tag,
+body.light .hero-note,
+body.light .side,
+body.light .interlude p,
+body.light footer{color:#777078}
+.theme-toggle{
+  appearance:none;border:1px solid var(--line);background:transparent;color:var(--fg);
+  padding:8px 11px;font:13px "DM Mono",monospace;cursor:pointer;margin-left:10px;
+  transition:.2s
+}
+.theme-toggle:hover{border-color:var(--pink);color:var(--pink)}
+
+.wrap{width:min(94vw,1400px);margin:auto;position:relative}
+nav{height:72px;display:flex;justify-content:space-between;align-items:center;font-size:14px;position:relative;z-index:5}
+nav .mark{font-weight:700;letter-spacing:-.03em}
+nav .mark i{color:var(--pink);font-style:normal}
+nav .navlinks{display:flex;gap:25px;color:var(--muted)}
+nav a:hover{color:var(--fg)}
+
+.hero{height:calc(100vh - 72px);min-height:650px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero .tiny{position:absolute;left:1%;top:12%;font-size:14px;font:14px "DM Mono",monospace;color:var(--muted);writing-mode:vertical-rl}
+.hero .tiny b{color:var(--pink);font-weight:normal}
+.hero h1{position:relative;margin:0;z-index:2;font-size:clamp(90px,17vw,245px);line-height:.72;letter-spacing:-.11em;font-weight:700;transform:scaleX(.83);transform-origin:left center}
+.hero h1 span{display:block}
+.hero h1 .line2{margin-left:14vw;color:transparent;-webkit-text-stroke:1px #6f6970}
+.hero h1 .line3{margin-left:4vw}
+.hero h1 em{color:var(--pink);font-style:normal;position:relative}
+.orbit{position:absolute;width:35vw;height:35vw;min-width:330px;min-height:330px;border:1px solid #27232a;border-radius:50%;right:3%;top:15%;animation:spin 22s linear infinite}
+.orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%;background:var(--pink)}
+.orbit:before{width:9px;height:9px;left:18%;top:9%;box-shadow:0 0 25px var(--pink)}
+.orbit:after{width:4px;height:4px;right:13%;bottom:22%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cross{position:absolute;right:22%;bottom:15%;color:var(--pink);font-size:30px;font-weight:200}
+.floating-word{position:absolute;z-index:3;font-weight:700;letter-spacing:-.06em;pointer-events:none}
+.word-a{right:25%;top:18%;font-size:clamp(30px,4vw,58px);transform:rotate(-7deg);color:var(--pink)}
+.word-b{left:9%;bottom:18%;font-size:clamp(18px,2vw,28px);transform:rotate(3deg);color:#514b53}
+.word-c{right:7%;top:48%;font:24px "DM Mono",monospace;color:#514b53;letter-spacing:.2em}
+.word-d{left:34%;top:11%;font:14px "DM Mono",monospace;color:#6c666d;transform:rotate(-2deg)}
+body.light .word-b,body.light .word-c,body.light .word-d{color:#817981}
+.hero-note{position:absolute;right:2%;bottom:7%;width:190px;font:13px/1.6 "DM Mono",monospace;color:var(--muted)}
+.hero-note strong{color:var(--fg);font-weight:normal}
+.scroll{position:absolute;bottom:4%;left:1%;font:12px "DM Mono",monospace;color:var(--muted)}
+.scroll span{color:var(--pink)}
+
+.marquee{border-top:1px solid #211e23;border-bottom:1px solid #211e23;overflow:hidden;white-space:nowrap;padding:15px 0;color:#4c484e;font-size:11px;letter-spacing:.18em}
+.marquee div{display:inline-block;animation:move 25s linear infinite}
+.marquee b{color:var(--pink);font-weight:normal;margin:0 40px}
+@keyframes move{to{transform:translateX(-50%)}}
+
+.about{min-height:760px;position:relative;padding:175px 0}
+.about .number{position:absolute;top:55px;left:2%;font:13px "DM Mono",monospace;color:var(--pink)}
+.about .statement{width:76%;margin-left:12%;font-size:clamp(44px,7vw,104px);line-height:.96;letter-spacing:-.07em}
+.about .statement .muted{color:#48434a}
+.about .side{position:absolute;right:4%;bottom:100px;width:180px;font:13px/1.6 "DM Mono",monospace;color:var(--muted)}
+.about .side:before{content:"";display:block;width:55px;height:1px;background:var(--pink);margin-bottom:15px}
+.stack-line{margin-top:55px;font:15px "DM Mono",monospace;line-height:1.8;color:var(--pink);letter-spacing:.02em}
+.tech-chaos{height:390px;position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.tech-chaos span{position:absolute;font-weight:700;letter-spacing:-.06em;line-height:.9}
+.tc1{left:6%;top:20%;font-size:64px}.tc2{left:28%;top:48%;font-size:35px;color:var(--pink);transform:rotate(-6deg)}
+.tc3{right:6%;top:16%;font-size:28px}.tc4{left:47%;top:16%;font-size:74px;color:#3e3940}
+.tc5{right:19%;bottom:18%;font-size:53px}.tc6{left:11%;bottom:14%;font-size:27px;color:var(--pink)}
+.tc7{left:40%;bottom:12%;font:15px "DM Mono",monospace;color:#676168;transform:rotate(3deg)}
+.tc8{right:5%;top:53%;font:13px "DM Mono",monospace;color:#676168;transform:rotate(-4deg)}
+.tc9{left:35%;top:72%;font:11px "DM Mono",monospace;color:#514b53}
+.work-dumb{font:13px "DM Mono",monospace;color:var(--muted);margin:-70px 0 75px 6%;transform:rotate(-2deg)}
+.interlude p span{color:var(--pink)}
+body.light .tc3,body.light .tc4,body.light .tc7,body.light .tc8,body.light .tc9{color:#817981}
+
+.work{position:relative;padding:130px 0 210px}
+.work .title{font-size:14px;color:var(--pink);font-family:"DM Mono",monospace;margin-left:5%}
+.work h2{font-size:clamp(85px,14vw,205px);line-height:.72;letter-spacing:-.1em;margin:25px 0 100px 5%;font-weight:600}
+.project{position:relative;width:78%;margin:0 0 2px auto;min-height:205px;border-top:1px solid #29252b;display:grid;grid-template-columns:70px 1fr 120px;align-items:center;padding:20px 25px;transition:.3s}
+.project:nth-child(even){width:61%;margin-right:8%}
+.project:hover{width:80%;background:#111014}
+.project .n{font:13px "DM Mono",monospace;color:var(--pink)}
+.project h3{font-size:clamp(28px,3vw,42px);margin:0 0 7px;letter-spacing:-.04em}
+.project p{font-size:11px;color:var(--muted);margin:0}
+.project .tag{font:13px "DM Mono",monospace;text-align:right;color:var(--muted)}
+.project .plus{position:absolute;right:-1px;top:-12px;color:var(--pink);font-size:20px}
+
+.thoughts{height:300px;position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.thought{position:absolute;font-weight:600;letter-spacing:-.05em}
+.t1{left:7%;top:25%;font-size:42px}
+.t2{left:29%;top:57%;font-size:20px;color:var(--pink);transform:rotate(-8deg)}
+.t3{right:12%;top:20%;font-size:50px;color:#3f3a41;transform:rotate(5deg)}
+.t4{right:26%;bottom:18%;font-size:16px;color:#68626a}
+.t5{left:42%;top:15%;font-size:13px;font-family:"DM Mono",monospace;color:#666069}
+.t6{left:6%;bottom:15%;font:13px "DM Mono",monospace;color:#59535b}
+body.light .t3,body.light .t4,body.light .t5,body.light .t6{color:#817981}
+.interlude{height:500px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.interlude .ring{width:280px;height:280px;border:1px solid #29252b;border-radius:50%;position:absolute}
+.interlude .ring:nth-child(2){width:190px;height:190px;border-color:var(--pink);opacity:.35}
+.interlude .ring:nth-child(3){width:65px;height:65px;background:var(--pink);border:0;box-shadow:0 0 80px 10px rgba(255,63,157,.22)}
+.interlude p{position:absolute;font:13px "DM Mono",monospace;color:var(--muted);bottom:45px}
+.interlude .coords{left:3%;top:40px;color:#454047}
+.interlude .coords b{color:var(--pink);font-weight:normal}
+
+.contact{min-height:650px;border-top:1px solid #211e23;position:relative;padding:110px 0}
+.contact .small{font:13px "DM Mono",monospace;color:var(--pink);margin-left:5%}
+.contact h2{font-size:clamp(95px,18vw,260px);letter-spacing:-.12em;line-height:.72;margin:70px 0 0 2%;font-weight:600}
+.contact h2 span{display:inline-block;color:transparent;-webkit-text-stroke:1px #625d64}
+.socials{position:absolute;right:4%;bottom:100px;display:flex;flex-direction:column;gap:0;align-items:flex-endgap:0;}
+.socials a{font:14px "DM Mono",monospace;color:var(--muted);border-bottom:1px solid #29252b;padding-bottom:4px}
+.socials a:hover{color:var(--pink);border-color:var(--pink)}
+
+footer{border-top:1px solid #211e23;padding:20px 0 35px;display:flex;justify-content:space-between;font:12px "DM Mono",monospace;color:#48434a}
+
+.cursor-dot{position:fixed;left:-7px;top:-7px;width:10px;height:10px;border:1px solid var(--pink);border-radius:50%;pointer-events:none;z-index:100;mix-blend-mode:difference;transition:width .2s,height .2s,left .2s,top .2s}
+.cursor-dot.big{width:24px;height:24px;left:-12px;top:-12px}
+.ticker{
+  padding:18px 0;border-bottom:1px solid var(--line);font:14px "DM Mono",monospace;
+  color:var(--muted);white-space:nowrap;overflow:hidden
+}
+.ticker span:nth-child(odd){color:var(--fg)}
+.status-stack{
+  position:absolute;right:2%;top:20%;z-index:4;font:13px "DM Mono",monospace;
+  line-height:1.9;color:var(--muted);transform:rotate(3deg)
+}
+.status-stack b{font-weight:normal;color:var(--pink)}
+.hero-thought{
+  position:absolute;left:24%;bottom:7%;font:13px "DM Mono",monospace;
+  color:#57515a;transform:rotate(-4deg)
+}
+.work-note{
+  position:absolute;right:7%;margin-top:-110px;font:12px "DM Mono",monospace;
+  color:#5b555d;transform:rotate(2deg)
+}
+.changelog{
+  min-height:440px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;padding:70px 5%;overflow:hidden
+}
+.change-title{font:14px "DM Mono",monospace;color:var(--pink)}
+.change-list{
+  position:absolute;left:5%;bottom:55px;display:flex;flex-direction:column;
+  gap:8px;font:13px "DM Mono",monospace;color:var(--muted)
+}
+.change-big{
+  position:absolute;right:5%;top:90px;text-align:right;
+  font-size:clamp(55px,9vw,130px);line-height:.78;letter-spacing:-.09em;font-weight:700
+}
+.change-big i{color:transparent;-webkit-text-stroke:1px #666069;font-style:normal}
+.easter{
+  position:absolute;left:4%;bottom:105px;font:13px "DM Mono",monospace;color:#57515a;
+  cursor:pointer;transition:.25s
+}
+.easter:hover{color:var(--pink);transform:rotate(-3deg) translateX(8px)}
+body.light .hero-thought,body.light .work-note,body.light .easter{color:#817981}
+body.light .change-big i{color:transparent;-webkit-text-stroke:1px #918a91}
+
+@media(max-width:700px){
+ nav .navlinks{gap:12px}.hero{min-height:600px}.hero h1{font-size:24vw}.floating-word{font-size:13px!important}.hero h1 .line2{margin-left:4vw}
+ .orbit{width:75vw;height:75vw;right:-20%;top:20%;opacity:.55}.hero-note{right:2%;bottom:12%;width:145px}.status-stack{top:14%;right:3%;font-size:11px}.hero-thought{left:5%;bottom:7%;font-size:10px}
+ .about{padding:110px 0;min-height:620px}.about .statement{width:92%;margin-left:4%;font-size:14vw}.about .side{right:5%;bottom:45px}.stack-line{font-size:12px;margin-top:35px}
+ .work{padding:80px 0}.work h2{font-size:24vw;margin-left:3%;margin-bottom:60px}.project,.project:nth-child(even){width:94%;margin:0 3%;grid-template-columns:38px 1fr;padding:18px 10px}
+ .project .tag{display:none}.project h3{font-size:25px}.tech-chaos{height:320px}.tc1{font-size:45px}.tc4{font-size:50px}.tc5{font-size:37px}.interlude{height:400px}
+ .contact{padding:90px 0;min-height:560px}.contact h2{font-size:24vw;margin-top:60px}.socials{left:5%;right:auto;bottom:60px;align-items:flex-start}
+ footer{display:block}footer span{display:block;margin-top:7px}
+}
+/* tight socials */
+.socials { gap: 0 !important; }
+.socials .social { margin: 0 !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="mark" href="#">YOUR NAME<i>●</i></a>
+  <div class="navlinks"><a href="#about">about</a><a href="#work">projects</a><a href="#contact">contact</a><button class="theme-toggle" id="themeToggle" type="button">LIGHT ↗</button></div>
+</nav>
+
+<section class="hero">
+  <div class="tiny">03 / VTDT / <b>STUDENT</b></div>
+  <h1><span>I MAKE</span><span class="line2">WEBSITES</span><span class="line3">& STUFF<em>.</em></span></h1>
+  <div class="orbit"></div>
+  <div class="cross">+</div>
+  <div class="status-stack">
+    <div>03RD YEAR @ VTDT</div>
+    <div>HTML / CSS / PHP / JS</div>
+    <div>LARAVEL / C++</div>
+  </div>
+  <div class="floating-word word-a">notes</div>
+  <div class="floating-word word-b">learning</div>
+  <div class="floating-word word-c">/ / /</div>
+  <div class="floating-word word-d">HTML FIRST</div>
+  <div class="hero-note"><strong>hello.</strong><br>I'm a 3rd year student learning to make things for the web. Mostly HTML. For now.</div>
+  <div class="scroll"><span>↓</span> keep going</div>
+  <div class="hero-thought">not finished yet</div>
+</section>
+
+<div class="ticker">
+  <span>currently learning</span> → <span>currently building</span> → <span>currently breaking</span> → <span>currently trying again</span> → <span>repeat</span>
+</div>
+
+<div class="marquee"><div>HTML / CSS / LEARNING / BUILDING / BREAKING / TRYING AGAIN / <b>✳</b> HTML / CSS / LEARNING / BUILDING / BREAKING / TRYING AGAIN / <b>✳</b></div></div>
+
+<section class="about" id="about">
+  <div class="number">01 — WHO AM I</div>
+  <div class="statement">
+    <span>I’m still figuring out</span><br>
+    <span>what I’m doing.</span><br>
+    <span class="muted">That’s kind of the point.</span>
+    <div class="stack-line">HTML · CSS · JAVASCRIPT · PHP · LARAVEL · C++ · ...</div>
+  </div>
+  <div class="side">03RD YEAR @ VTDT<br><br>
+    Working with HTML, CSS, JavaScript, PHP, Laravel and C++.<br><br>
+    There are probably a few things I forgot to list.
+    </div>
+</section>
+
+<section class="tech-chaos" aria-label="things currently in the toolbox">
+  <span class="tc1">HTML</span>
+  <span class="tc2">CSS</span>
+  <span class="tc3">JAVASCRIPT</span>
+  <span class="tc4">PHP</span>
+  <span class="tc5">LARAVEL</span>
+  <span class="tc6">C++</span>
+  <span class="tc7">VS CODE</span>
+  <span class="tc8">other stuff</span>
+  <span class="tc9">more later</span>
+</section>
+
+<section class="work" id="work">
+  <div class="title">02 — PROJECTS</div>
+  <h2>WORK<span style="color:var(--pink)">_</span></h2>
+  <div class="work-dumb">projects, experiments, unfinished things</div>
+  <div class="work-note">still adding to this</div>
+
+  <!-- CHANGE THESE PROJECTS IN VS CODE -->
+  <a class="project" href="#">
+    <div class="n">01</div><div><h3>PROJECT ONE</h3><p>add a short description here.</p></div><div class="tag">HTML</div><div class="plus">+</div>
+  </a>
+  <a class="project" href="#">
+    <div class="n">02</div><div><h3>PROJECT TWO</h3><p>what it does / what I used.</p></div><div class="tag">WEB</div><div class="plus">+</div>
+  </a>
+  <a class="project" href="#">
+    <div class="n">03</div><div><h3>PROJECT THREE</h3><p>another project can go here.</p></div><div class="tag">HTML</div><div class="plus">+</div>
+  </a>
+</section>
+
+<section class="thoughts">
+  <div class="thought t1">open file</div>
+  <div class="thought t2">save</div>
+  <div class="thought t3">test it</div>
+  <div class="thought t4">fix later</div>
+  <div class="thought t5">okay...</div>
+  <div class="thought t6">001 → 002 → 003</div>
+</section>
+
+<section class="changelog">
+  <div class="change-title">little history</div>
+  <div class="change-list">
+    <span>09.07.26 — updated portfolio</span>
+    <span>08.07.26 — worked on the layout</span>
+    <span>07.07.26 — added projects</span>
+    <span>06.07.26 — started building</span>
+  </div>
+  <div class="change-big">STILL LEARNING.<br><i>STILL BUILDING.</i></div>
+</section>
+
+<section class="interlude">
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="coords">STATUS: <b>LEARNING</b> / 001</div>
+  <p>somewhere between code and design.</p>
+</section>
+
+<section class="contact" id="contact">
+  <div class="small">03 — SOCIALS / CONTACT</div>
+  <h2>HELLO<span>?</span></h2>
+  <div class="easter" id="easter">probably should add something here</div>
+      <div class="social-label">FIND ME / SAY HI</div>
+<div class="socials">
+    <!-- ADD YOUR SOCIAL LINKS HERE -->
+    <a href="#">GITHUB ↗</a>
+    <a href="#">INSTAGRAM ↗</a>
+    <a href="#"></a>
+    <a href="mailto:YOUR_EMAIL_HERE">EMAIL ↗</a>
+  </div>
+</section>
+
+<footer><span>© 2026 YOUR NAME</span><span>made in VS Code / learning</span></footer>
+</div>
+<script>
+const toggle = document.getElementById("themeToggle");
+const saved = localStorage.getItem("portfolio-theme");
+if(saved === "light") document.body.classList.add("light");
+function updateThemeButton(){
+  toggle.textContent = document.body.classList.contains("light") ? "DARK ↗" : "LIGHT ↗";
+}
+updateThemeButton();
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  localStorage.setItem("portfolio-theme", document.body.classList.contains("light") ? "light" : "dark");
+  updateThemeButton();
+});
+</script>
+<div class="cursor-dot" id="cursorDot"></div>
+<script>
+const dot=document.getElementById("cursorDot");
+document.addEventListener("mousemove",e=>{
+  dot.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
+});
+document.querySelectorAll("a,button,.easter").forEach(el=>{
+  el.addEventListener("mouseenter",()=>dot.classList.add("big"));
+  el.addEventListener("mouseleave",()=>dot.classList.remove("big"));
+});
+const easter=document.getElementById("easter");
+easter.addEventListener("click",()=>{
+  easter.textContent=easter.textContent.includes("404")
+    ? "okay, you found it."
+    : "probably should add something here";
+});
+</script>
+</body>
+</html>
