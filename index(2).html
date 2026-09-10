@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOUR NAME — somewhere online</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="mark" href="#">YOUR NAME<i>●</i></a>
+  <div class="navlinks"><a href="#about">about</a><a href="#work">projects</a><a href="#contact">contact</a><button class="theme-toggle" id="themeToggle" type="button">LIGHT ↗</button></div>
+</nav>
+
+<section class="hero">
+  <div class="tiny">03 / VTDT / <b>STUDENT</b></div>
+  <h1><span>I MAKE</span><span class="line2">WEBSITES</span><span class="line3">& STUFF<em>.</em></span></h1>
+  <div class="orbit"></div>
+  <div class="cross">+</div>
+  <div class="status-stack">
+    <div>03RD YEAR @ VTDT</div>
+    <div>HTML / CSS / PHP / JS</div>
+    <div>LARAVEL / C++</div>
+  </div>
+  <div class="floating-word word-a">notes</div>
+  <div class="floating-word word-b">learning</div>
+  <div class="floating-word word-c">/ / /</div>
+  <div class="floating-word word-d">HTML FIRST</div>
+  <div class="hero-note"><strong>hello.</strong><br>I'm a 3rd year student learning to make things for the web. Mostly HTML. For now.</div>
+  <div class="scroll"><span>↓</span> keep going</div>
+  <div class="hero-thought">not finished yet</div>
+</section>
+
+<div class="ticker">
+  <span>currently learning</span> → <span>currently building</span> → <span>currently breaking</span> → <span>currently trying again</span> → <span>repeat</span>
+</div>
+
+<div class="marquee"><div>HTML / CSS / LEARNING / BUILDING / BREAKING / TRYING AGAIN / <b>✳</b> HTML / CSS / LEARNING / BUILDING / BREAKING / TRYING AGAIN / <b>✳</b></div></div>
+
+<section class="about" id="about">
+  <div class="number">01 — WHO AM I</div>
+  <div class="statement">
+    <span>I’m still figuring out</span><br>
+    <span>what I’m doing.</span><br>
+    <span class="muted">That’s kind of the point.</span>
+    <div class="stack-line">HTML · CSS · JAVASCRIPT · PHP · LARAVEL · C++ · ...</div>
+  </div>
+  <div class="side">03RD YEAR @ VTDT<br><br>
+    Working with HTML, CSS, JavaScript, PHP, Laravel and C++.<br><br>
+    There are probably a few things I forgot to list.
+    </div>
+</section>
+
+<section class="tech-chaos" aria-label="things currently in the toolbox">
+  <span class="tc1">HTML</span>
+  <span class="tc2">CSS</span>
+  <span class="tc3">JAVASCRIPT</span>
+  <span class="tc4">PHP</span>
+  <span class="tc5">LARAVEL</span>
+  <span class="tc6">C++</span>
+  <span class="tc7">VS CODE</span>
+  <span class="tc8">other stuff</span>
+  <span class="tc9">more later</span>
+</section>
+
+<section class="work" id="work">
+  <div class="title">02 — PROJECTS</div>
+  <h2>WORK<span style="color:var(--pink)">_</span></h2>
+  <div class="work-dumb">projects, experiments, unfinished things</div>
+  <div class="work-note">still adding to this</div>
+
+  <!-- CHANGE THESE PROJECTS IN VS CODE -->
+  <a class="project" href="#">
+    <div class="n">01</div><div><h3>PROJECT ONE</h3><p>add a short description here.</p></div><div class="tag">HTML</div><div class="plus">+</div>
+  </a>
+  <a class="project" href="#">
+    <div class="n">02</div><div><h3>PROJECT TWO</h3><p>what it does / what I used.</p></div><div class="tag">WEB</div><div class="plus">+</div>
+  </a>
+  <a class="project" href="#">
+    <div class="n">03</div><div><h3>PROJECT THREE</h3><p>another project can go here.</p></div><div class="tag">HTML</div><div class="plus">+</div>
+  </a>
+</section>
+
+<section class="thoughts">
+  <div class="thought t1">open file</div>
+  <div class="thought t2">save</div>
+  <div class="thought t3">test it</div>
+  <div class="thought t4">fix later</div>
+  <div class="thought t5">okay...</div>
+  <div class="thought t6">001 → 002 → 003</div>
+</section>
+
+<section class="changelog">
+  <div class="change-title">little history</div>
+  <div class="change-list">
+    <span>09.07.26 — updated portfolio</span>
+    <span>08.07.26 — worked on the layout</span>
+    <span>07.07.26 — added projects</span>
+    <span>06.07.26 — started building</span>
+  </div>
+  <div class="change-big">STILL LEARNING.<br><i>STILL BUILDING.</i></div>
+</section>
+
+<section class="interlude">
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="coords">STATUS: <b>LEARNING</b> / 001</div>
+  <p>somewhere between code and design.</p>
+</section>
+
+<section class="contact" id="contact">
+  <div class="small">03 — SOCIALS / CONTACT</div>
+  <h2>HELLO<span>?</span></h2>
+  <div class="easter" id="easter">probably should add something here</div>
+      <div class="social-label">FIND ME / SAY HI</div>
+<div class="socials">
+    <!-- ADD YOUR SOCIAL LINKS HERE -->
+    <a href="#">GITHUB ↗</a>
+    <a href="#">INSTAGRAM ↗</a>
+    <a href="#"></a>
+    <a href="mailto:YOUR_EMAIL_HERE">EMAIL ↗</a>
+  </div>
+</section>
+
+<footer><span>© 2026 YOUR NAME</span><span>made in VS Code / learning</span></footer>
+</div>
+<script>
+const toggle = document.getElementById("themeToggle");
+const saved = localStorage.getItem("portfolio-theme");
+if(saved === "light") document.body.classList.add("light");
+function updateThemeButton(){
+  toggle.textContent = document.body.classList.contains("light") ? "DARK ↗" : "LIGHT ↗";
+}
+updateThemeButton();
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  localStorage.setItem("portfolio-theme", document.body.classList.contains("light") ? "light" : "dark");
+  updateThemeButton();
+});
+</script>
+<div class="cursor-dot" id="cursorDot"></div>
+<script>
+const dot=document.getElementById("cursorDot");
+document.addEventListener("mousemove",e=>{
+  dot.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
+});
+document.querySelectorAll("a,button,.easter").forEach(el=>{
+  el.addEventListener("mouseenter",()=>dot.classList.add("big"));
+  el.addEventListener("mouseleave",()=>dot.classList.remove("big"));
+});
+const easter=document.getElementById("easter");
+easter.addEventListener("click",()=>{
+  easter.textContent=easter.textContent.includes("404")
+    ? "okay, you found it."
+    : "probably should add something here";
+});
+</script>
+</body>
+</html>
